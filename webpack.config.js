@@ -9,8 +9,6 @@ module.exports = {
         path: __dirname,
         filename: "dist/bundle.js"
     },
-    debug: true,
-    devtool: 'source-map',
     module: {
         loaders: [
             {
@@ -22,9 +20,21 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                loader: "style!css!less",
+                test: /\.less$/,
+                include: [
+                    path.resolve(__dirname, "src")
+                ]
             }
         ]
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
+    debug: true,
+    devtool: 'source-map',
     devServer: {
         contentBase: './src'
     }
