@@ -5,11 +5,18 @@ import TodoItemModel from '../models/todo-item'
 class TodoItem extends Component {
     render() {
         let item = this.props.item
+        let classNames = 'todo-item' + (item.completed ? ' completed' : '')
         return (
-            <span className="todo-item">
-                [{item.completed ? '✓' : ' ' }] {item.title}
+            <span className={classNames}>
+                <span className="checkbox" onClick={this.handleClick.bind(this)}>
+                    [{item.completed ? '✓' : ' ' }]
+                </span> {item.title}
             </span>
         )
+    }
+    handleClick(e) {
+        this.props.item.completed = !this.props.item.completed
+        this.setState({ item: this.props.item.completed })
     }
 }
 

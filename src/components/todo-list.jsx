@@ -9,8 +9,8 @@ class TodoList extends Component {
         this.count = 0
     }
     render() {
-        let items = this.props.items.map((item, i) => {
-            return <li key={i}><TodoItem item={item} /></li>
+        let items = this.props.items.map((item) => {
+            return <li key={item.id}><TodoItem item={item} /></li>
         })
         return <ul className="todo-list">{items}</ul>
     }
