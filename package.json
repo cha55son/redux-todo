@@ -1,0 +1,36 @@
+{
+  "name": "redux-todo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cha55son/redux-todo.git"
+  },
+  "author": "Chason Choate <cha55son@gmail.com> (http://chasonchoate.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cha55son/redux-todo/issues"
+  },
+  "homepage": "https://github.com/cha55son/redux-todo",
+  "dependencies": {
+    "redux": "^3.0.4",
+    "react": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "babel-polyfill": "^6.2.0",
+    "babel-runtime": "^6.2.0",
+    "react-dom": "^0.14.3"
+  },
+  "devDependencies": {
+    "redux-devtools": "^2.1.5",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "babel-loader": "^6.2.0",
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18"
+  }
+}
