@@ -1,6 +1,7 @@
 import './todo-item.less'
 import React, { Component, PropTypes } from 'react'
-import TodoItemModel from '../models/todo-item'
+
+import { TODO_PROP_TYPE, toggleTodo } from '../reducers/todos'
 
 class TodoItem extends Component {
     render() {
@@ -15,12 +16,12 @@ class TodoItem extends Component {
         )
     }
     handleClick(e) {
-        this.props.item.completed = !this.props.item.completed
-        this.setState({ item: this.props.item.completed })
+        this.props.dispatch(toggleTodo(this.props.item.id))
     }
 }
 
 TodoItem.propTypes = {
-    item: React.PropTypes.instanceOf(TodoItemModel).isRequired
+    item: TODO_PROP_TYPE,
+    dispatch: PropTypes.func.isRequired
 }
 export default TodoItem

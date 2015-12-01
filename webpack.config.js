@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
     entry: [
-        './src/app.jsx',
+        './src/bootstrap.jsx',
         'webpack-dev-server/client?http://localhost:8080'
     ],
     output: {
@@ -14,7 +14,7 @@ module.exports = {
             {
                 loader: "babel-loader",
                 include: [
-                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, 'src'),
                 ],
                 test: /\.jsx?$/,
                 query: {
@@ -25,7 +25,7 @@ module.exports = {
                 loader: "style!css!less",
                 test: /\.less$/,
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, 'src')
                 ]
             }
         ]

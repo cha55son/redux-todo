@@ -1,23 +1,25 @@
 import './todo-list.less'
 import React, { Component, PropTypes } from 'react'
-import TodoItemModel from '../models/todo-item'
+
+import { TODO_PROP_TYPE } from '../reducers/todos'
 import TodoItem from './todo-item'
 
 class TodoList extends Component {
-    constructor() {
-        super()
-        this.count = 0
-    }
     render() {
-        let items = this.props.items.map((item) => {
-            return <li key={item.id}><TodoItem item={item} /></li>
+        let items = this.props.items.map((item, i) => {
+            return (
+                <li key={i}>
+                    <TodoItem item={item} dispatch={this.props.dispatch} />
+                </li>
+            )
         })
         return <ul className="todo-list">{items}</ul>
     }
 }
 
 TodoList.propTypes = {
-    items: PropTypes.arrayOf(React.PropTypes.instanceOf(TodoItemModel))
+    items: PropTypes.arrayOf(TODO_PROP_TYPE),
+    dispatch: PropTypes.func.isRequired
 }
 TodoList.defaultProps = {
     items: []
