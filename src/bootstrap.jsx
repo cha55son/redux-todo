@@ -1,15 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, compose } from 'redux'
 import { Provider, connect } from 'react-redux'
+import { Router, Route, Link, IndexRoute } from 'react-router'
+import { syncReduxAndRouter } from 'redux-simple-router'
+import createHashHistory from 'history/lib/createHashHistory'
 
 import reducers from './reducers/app'
-import App from './components/app'
+
+// Pages
+import App from './components/App'
+import TodoList from './components/TodoList'
+import TodoAddItem from './components/TodoAddItem'
+import NotFound from './components/NotFound'
 
 // Delete once we eliminate the fixtures
 import { TODO_CREATE } from './reducers/todos'
 
-let store = createStore(reducers)
+const store = createStore(reducers)
+const history = createHashHistory()
+syncReduxAndRouter(history, store)
+
+// Fixtures
 store.dispatch({
     type: TODO_CREATE,
     title: 'Pick Quinn up',
@@ -20,11 +32,16 @@ store.dispatch({
     title: 'Decorate the christmas tree',
     completed: true
 })
-console.log(store.getState())
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={TodoList}/>
+            </Route>
+            <Route path="/add" component={TodoAddItem}/>
+            <Route path="*" component={NotFound}/>
+        </Router>
     </Provider>,
     document.getElementById('app-container')
 )

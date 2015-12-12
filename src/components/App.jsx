@@ -1,16 +1,19 @@
-import './app.less'
+import './App.less'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import { TODO_PROP_TYPE } from '../reducers/todos'
-import TodoList from './todo-list'
 
 class App extends Component {
     render() {
         return (
             <div className="todo-app">
-                <h3 className="app-header">Todo List</h3>
-                <TodoList items={this.props.todos} dispatch={this.props.dispatch} />
+                <Link to="/add">Add Todo</Link>
+                {React.cloneElement(this.props.children, {
+                     dispatch: this.props.dispatch,
+                     todos: this.props.todos
+                })}
             </div>
         )
     }

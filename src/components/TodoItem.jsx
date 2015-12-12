@@ -1,4 +1,4 @@
-import './todo-item.less'
+import './TodoItem.less'
 import React, { Component, PropTypes } from 'react'
 
 import { TODO_PROP_TYPE, toggleTodo } from '../reducers/todos'

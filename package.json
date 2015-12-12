@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,10 @@
     "react-redux": "^4.0.0",
     "babel-polyfill": "^6.2.0",
     "babel-runtime": "^6.2.0",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-router": "^1.0.0",
+    "history": "^1.13.1",
+    "redux-simple-router": "^1.0.0"
   },
   "devDependencies": {
     "redux-devtools": "^2.1.5",
