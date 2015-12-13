@@ -12,13 +12,14 @@ import reducers from './reducers/app'
 import App from './components/App'
 import TodoList from './components/TodoList'
 import TodoAddItem from './components/TodoAddItem'
+import TodoEditItem from './components/TodoEditItem'
 import NotFound from './components/NotFound'
 
 // Delete once we eliminate the fixtures
 import { TODO_CREATE } from './reducers/todos'
 
 const store = createStore(reducers)
-const history = createHashHistory()
+const history = createHashHistory({ queryKey: false })
 syncReduxAndRouter(history, store)
 
 // Fixtures
@@ -37,9 +38,10 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
-                <IndexRoute component={TodoList}/>
+                <IndexRoute component={TodoList} />
+                <Route path="add" component={TodoAddItem} />
+                <Route path="edit/:id" component={TodoEditItem} />
             </Route>
-            <Route path="/add" component={TodoAddItem}/>
             <Route path="*" component={NotFound}/>
         </Router>
     </Provider>,

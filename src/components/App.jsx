@@ -9,19 +9,13 @@ class App extends Component {
     render() {
         return (
             <div className="todo-app">
-                <Link to="/add">Add Todo</Link>
                 {React.cloneElement(this.props.children, {
-                     dispatch: this.props.dispatch,
-                     todos: this.props.todos
+                    dispatch: this.props.dispatch,
+                    todos: this.props.todos
                 })}
             </div>
         )
     }
-}
-
-App.propTypes = {
-    todos: PropTypes.arrayOf(TODO_PROP_TYPE),
-    dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

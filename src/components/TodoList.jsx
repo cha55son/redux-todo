@@ -1,5 +1,6 @@
 import './TodoList.less'
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 import { TODO_PROP_TYPE } from '../reducers/todos'
 import TodoItem from './TodoItem'
@@ -15,15 +16,19 @@ class TodoList extends Component {
         })
         return (
             <div className="todo-list">
-                <h3 className="header">Todo List</h3>
-                <ul className="todo-list">{todos}</ul>
+                <h3 className="header">
+                    Todo List 
+                    <small className="filters">
+                        <Link to="/">All</Link>&nbsp;|&nbsp;
+                        <Link to="/?filter=incomplete">Incomplete</Link>&nbsp;|&nbsp;
+                        <Link to="/?filter=complete">Complete</Link>
+                    </small>
+                </h3>
+                <ul>{todos}</ul>
+                <Link to="/add">Add Todo</Link>
             </div>
         )
     }
 }
 
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(TODO_PROP_TYPE).isRequired,
-    dispatch: PropTypes.func.isRequired
-}
 export default TodoList
