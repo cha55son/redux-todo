@@ -3,16 +3,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { pushPath } from 'redux-simple-router'
 
-import { createTodo } from '../reducers/todos'
+import { createTodo } from '../actions/todos'
 
 class TodoAddItem extends Component {
     formSubmit(e) {
         e.preventDefault()
         // TODO: Add validation
-        this.props.dispatch(createTodo(
-            this.refs.title.value, 
-            this.refs.completed.value === 'on'
-        ))
+        this.props.dispatch(createTodo({
+            title: this.refs.title.value,
+            completed: this.refs.completed.value === 'on'
+        }))
         this.props.dispatch(pushPath('/'))
     }
     render() {

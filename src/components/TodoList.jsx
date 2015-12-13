@@ -2,14 +2,14 @@ import './TodoList.less'
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import { TODO_PROP_TYPE } from '../reducers/todos'
+import { TODO_PROP_TYPE } from '../actions/todos'
 import TodoItem from './TodoItem'
 
 class TodoList extends Component {
     render() {
         let todos = this.props.todos.map((todo, i) => {
             return (
-                <li key={i}>
+                <li key={todo.id}>
                     <TodoItem item={todo} dispatch={this.props.dispatch} />
                 </li>
             )

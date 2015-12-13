@@ -16,7 +16,7 @@ import TodoEditItem from './components/TodoEditItem'
 import NotFound from './components/NotFound'
 
 // Delete once we eliminate the fixtures
-import { TODO_CREATE } from './reducers/todos'
+import { TODO_CREATE } from './actions/todos'
 
 const store = createStore(reducers)
 const history = createHashHistory({ queryKey: false })
@@ -25,13 +25,17 @@ syncReduxAndRouter(history, store)
 // Fixtures
 store.dispatch({
     type: TODO_CREATE,
-    title: 'Pick Quinn up',
-    completed: false
+    props: {
+        title: 'Pick Quinn up',
+        completed: false
+    }
 })
 store.dispatch({
     type: TODO_CREATE,
-    title: 'Decorate the christmas tree',
-    completed: true
+    props: {
+        title: 'Decorate the christmas tree',
+        completed: true
+    }
 })
 
 ReactDOM.render(

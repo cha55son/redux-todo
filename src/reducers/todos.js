@@ -1,60 +1,45 @@
-import { PropTypes } from 'react'
+import { TODO_CREATE, TODO_UPDATE, TODO_DELETE } from '../actions/todos'
 
-// PropType defs
-export const TODO_PROP_TYPE = PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired
-})
-
-// Action types
-export const TODO_CREATE = 'TODO_CREATE'
-export const TODO_DELETE = 'TODO_DELETE'
-export const TODO_TOGGLE = 'TODO_TOGGLE'
-
-// Action creators
-export function createTodo(title = '', completed = false) {
-    return { type: TODO_CREATE, title, completed } 
-}
-export function deleteTodo(id = -1) {
-    return { type: TODO_DELETE, id }
-}
-export function toggleTodo(id = -1) {
-    return { type: TODO_TOGGLE, id }
-}
-
-// Reducer, must return a new array!
+// Reducer, must return a new array if you change anything!
 export function reduceTodos(state = [], action) {
     switch (action.type) {
         case TODO_CREATE:
             return [
                 ...state,
-                {
-                    id: getId(state),
-                    title: action.title,
-                    completed: action.completed
-                }
+                Object.assign({
+                    title: '',
+                    completed: false
+                }, action.props || {}, {
+                    // Not allowed to override the id.
+                    id: getId(state)
+                })
+            ]
+        case TODO_UPDATE:
+            let { todo: todoUpdate, index: indexUpdate } = getTodoAndIndexById(state, action.id)
+            if (!todoUpdate) { 
+                console.error(`Todo with id "${action.id}" does not exist! Cannot update it.`) 
+                return state
+            }
+            return [
+                ...state.slice(0, indexUpdate),
+                // Not allowed to override the id.
+                Object.assign({}, todoUpdate, action.props || {}, { id: todoUpdate.id }),
+                ...state.slice(indexUpdate + 1)
             ]
         case TODO_DELETE:
-            if (action.id < 0) { return state }
             let { todo: todoDelete, index: indexDelete } = getTodoAndIndexById(state, action.id)
-            return [...state.slice(0, indexDelete), ...state.slice(indexDelete + 1, state.length)]
-        case TODO_TOGGLE: 
-            let { todo, index } = getTodoAndIndexById(state, action.id)
-            if (!todo) { console.error(`Todo with id "${action.id}" does not exist!`) }
-            return [
-                ...state.slice(0, index),
-                Object.assign({}, todo, {
-                    completed: !todo.completed
-                }),
-                ...state.slice(index + 1)
-            ]
+            if (!todoDelete) { 
+                console.error(`Todo with id "${action.id}" does not exist! Cannot delete it.`) 
+                return state
+            }
+            return [...state.slice(0, indexDelete), ...state.slice(indexDelete + 1)]
         default: 
             return state
     }
 }
 
 // Helpers
+
 // Get the next highest id
 function getId(todos) {
     let maxId = 0

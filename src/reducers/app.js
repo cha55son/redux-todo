@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import { routeReducer } from 'redux-simple-router';
+import { routeReducer } from 'redux-simple-router'
 
 import { reduceTodos } from './todos'
+import { reduceRoutes } from './routes'
 
 export default combineReducers({
     everything: function(state = {}, action) {
@@ -9,5 +10,6 @@ export default combineReducers({
         return state
     },
     routing: routeReducer,
+    routes: reduceRoutes,
     todos: reduceTodos
 })

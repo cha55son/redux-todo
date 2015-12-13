@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import { TODO_PROP_TYPE } from '../reducers/todos'
+import { TODO_PROP_TYPE } from '../actions/todos'
 
 class App extends Component {
     render() {

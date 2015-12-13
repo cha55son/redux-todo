@@ -2,7 +2,7 @@ import './TodoItem.less'
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import { TODO_PROP_TYPE, toggleTodo, deleteTodo } from '../reducers/todos'
+import { TODO_PROP_TYPE, updateTodo, deleteTodo } from '../actions/todos'
 
 class TodoItem extends Component {
     render() {
@@ -20,7 +20,7 @@ class TodoItem extends Component {
         )
     }
     toggleComplete(e) {
-        this.props.dispatch(toggleTodo(this.props.item.id))
+        this.props.dispatch(updateTodo(this.props.item.id, { completed: !this.props.item.completed }))
     }
     clickDelete(e) {
         e.preventDefault()
