@@ -7,7 +7,13 @@ import TodoItem from './TodoItem'
 
 class TodoList extends Component {
     render() {
-        let todos = this.props.todos.map((todo, i) => {
+        let filterParam = this.props.location.query.filter
+        let todos = this.props.todos.filter((todo) => {
+            if      (filterParam === 'incomplete') { return !todo.completed }
+            else if (filterParam === 'complete'  ) { return todo.completed  }
+            return true
+        })
+        todos = todos.map((todo, i) => {
             return (
                 <li key={todo.id}>
                     <TodoItem item={todo} dispatch={this.props.dispatch} />
@@ -20,8 +26,8 @@ class TodoList extends Component {
                     Todo List 
                     <small className="filters">
                         <Link to="/">All</Link>&nbsp;|&nbsp;
-                        <Link to="/?filter=incomplete">Incomplete</Link>&nbsp;|&nbsp;
-                        <Link to="/?filter=complete">Complete</Link>
+                        <Link to="/" query={{ filter: 'incomplete' }}>Incomplete</Link>&nbsp;|&nbsp;
+                        <Link to="/" query={{ filter: 'complete' }}>Complete</Link>
                     </small>
                 </h3>
                 <ul>{todos}</ul>
